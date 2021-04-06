@@ -9,17 +9,11 @@ is.class = function(col, class_name) {
 get.col.type = function(col, col.name) {
     nom.type = 'nominal'
     num.type = 'numeric'
-    NA.RATIO = 1.0
     min.n.unique.vals = 10
     max.n.unique.vals = 20
 
     col.len = nrow(col)
     n.na.vals = sum(is.na(col))
-
-    # If the column has too many NA values, it is unfit to be in a machine learning data set
-    if ((n.na.vals / col.len) >= NA.RATIO) {
-        return(NA)
-    }
 
     # Get the number of unique non NA values in the column
     n.unique.vals = filter(col, !is.na(!!sym(col.name))) %>% unique() %>% nrow()
